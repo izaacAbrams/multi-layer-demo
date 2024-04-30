@@ -1,24 +1,18 @@
 import { useLayoutEffect, useState, useRef, useEffect } from "react";
 import "./App.css";
-import { Layer, Stage } from "react-konva";
-import Konva from "konva";
-import { repositionStage } from "./utils/repositionStage";
 import Stats from "stats.js";
 import { Page } from "./Page";
 
-const PADDING = 500;
 const MIN_X_PADDING = 45;
 const MIN_Y_PADDING = 45;
 const DESIGN_SIZE = { width: 1080, height: 1080 };
-const PAGES_COUNT = 10;
-
+const PAGES_COUNT = 20;
 
 function App() {
   const [scale, setScale] = useState(1);
   const [size, setSize] = useState({ width: 100, height: 100 });
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<Konva.Stage>(null);
 
   useEffect(() => {
     const stats = new Stats();
@@ -77,48 +71,19 @@ function App() {
 
   return (
     <div>
-      <div
-        id="scroll-container"
-        ref={containerRef}
-        onScroll={(e) => {
-          const scrollContainer = e.target as HTMLDivElement;
-          const stage = stageRef.current;
-          if (!stage) return;
-          repositionStage({
-            container: scrollContainer,
-            padding: PADDING,
-            stage,
-          });
-        }}
-      >
-        <div
-          id="large-container"
-          style={{
-            width: `${pageWidth}px`,
-            height: `${(pageHeight) * PAGES_COUNT}px`,
-          }}
-        >
-          <Stage
-            width={window.innerWidth + PADDING}
-            height={window.innerHeight + PADDING}
-            ref={stageRef}
-          >
-            <Layer>
-              {Array(PAGES_COUNT)
-                .fill(0)
-                .map((__x, i) => (
-                  <Page
-                    scale={scale}
-                    key={`page-${i}`}
-                    pageDims={{ width: pageWidth, height: pageHeight }}
-                    designDims={DESIGN_SIZE}
-                    padding={{ x: xPadding, y: yPadding }}
-                    pageIndex={i}
-                  />
-                ))}
-            </Layer>
-          </Stage>
-        </div>
+      <div ref={containerRef}>
+        {Array(PAGES_COUNT)
+          .fill(0)
+          .map((__x, i) => (
+            <Page
+              scale={scale}
+              key={`page-${i}`}
+              pageDims={{ width: pageWidth, height: pageHeight }}
+              designDims={DESIGN_SIZE}
+              padding={{ x: xPadding, y: yPadding }}
+            />
+          ))}
+        {/* </div> */}
       </div>
 
       <div className="zoom-control">

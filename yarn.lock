@@ -1689,6 +1689,11 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-image@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/use-image/-/use-image-1.1.1.tgz#bdd3f2e1718393ffc0e56136f993467103d9d2df"
+  integrity sha512-n4YO2k8AJG/BcDtxmBx8Aa+47kxY5m335dJiCQA5tTeVU4XdhrhqR6wT0WISRXwdMEOv5CSjqekDZkEMiiWaYQ==
+
 vite@^5.2.0:
   version "5.2.10"
   resolved "https://registry.yarnpkg.com/vite/-/vite-5.2.10.tgz#2ac927c91e99d51b376a5c73c0e4b059705f5bd7"
